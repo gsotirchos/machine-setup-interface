@@ -1,4 +1,4 @@
-from numpy import array, pi, sin, arcsin, floor
+from numpy import array, pi, arcsin, floor
 # from numpy import add as np_add, array
 # from pprint import pprint
 
@@ -59,8 +59,7 @@ class Configuration:
 
     def vert_panel_steps(self, dimensions, offsets):
         # calculate vertical (right) panel side's steppers' steps
-        theta = reduced_rots = motor_rots = motor_steps = \
-            array([0, 0])
+        motor_angle = motor_steps = array([0, 0])
 
         if not dimensions['is_horizontal']:
             distance = (self.RIGHT_CENTER_DIST - self.STOP_TIP_RADIUS +
@@ -70,17 +69,14 @@ class Configuration:
                         (dimensions['panel_width'] -
                          dimensions['grid_width'])/2)
 
-        theta = arcsin(distance/self.PANEL_STOP_LENGTH)
-        motor_angle = -(theta - self.START_ANGLE - offsets)  # rad
-        reduced_rots = motor_angle/(2*pi)  # rotations after reduction
-        motor_rots = reduced_rots*self.REDUCER_RATIO
-        motor_steps = floor(motor_rots*360/self.STEP_ANGLE)
+        theta = arcsin(distance/self.PANEL_STOP_LENGTH)*360/(2*pi)
+        motor_angle = theta - self.START_ANGLE - offsets  # radians
+        motor_steps = floor(motor_angle/self.STEP_ANGLE)
         return motor_steps.tolist()
 
     def horiz_panel_steps(self, dimensions, offsets):
         # calculate horizontal (bottom) panel side's steppers' steps
-        distance = theta = reduced_rots = motor_rots = motor_steps = \
-            array([0, 0])
+        motor_angle = motor_steps = array([0, 0])
 
         if not dimensions['is_horizontal']:
             distance = (self.BOTTOM_CENTER_DIST - self.STOP_TIP_RADIUS -
@@ -90,11 +86,9 @@ class Configuration:
             distance = (self.BOTTOM_CENTER_DIST - self.STOP_TIP_RADIUS +
                         dimensions['header_exit_length'])
 
-        theta = arcsin(distance/self.PANEL_STOP_LENGTH)
-        motor_angle = -(theta - self.START_ANGLE - offsets)  # rad
-        reduced_rots = motor_angle/(2*pi)  # rotations after reduction
-        motor_rots = reduced_rots*self.REDUCER_RATIO
-        motor_steps = floor(motor_rots*360/self.STEP_ANGLE)
+        theta = arcsin(distance/self.PANEL_STOP_LENGTH)*360/(2*pi)
+        motor_angle = theta - self.START_ANGLE - offsets  # radians
+        motor_steps = floor(motor_angle/self.STEP_ANGLE)
         return motor_steps.tolist()
 
     def stepper_steps(self, dimensions, offsets):
@@ -115,4 +109,4 @@ class Configuration:
         with open(file_path, 'w', encoding='utf-8') as the_file:
             the_file.write('# steppers\' steps (1 step = 1.8 deg)\n')
             for i in range(len(steps)):
-                the_file.write('motor_'+str(i)+':'+str(steps[i])+'\n')
+                the_file.write('motor_'+str(i)+': '+str(steps[i])+'\n')
