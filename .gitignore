@@ -1,2 +1,5 @@
 __pycache__/
 *.exe
+*.txt
+*.cfg
+*.dat
