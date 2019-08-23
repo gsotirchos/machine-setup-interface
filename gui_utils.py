@@ -185,13 +185,13 @@ class Gui:
                  key='motor_4')]
             ])],
             [sg.Frame('Φύλλο X', layout=[
-                [sg.Text('Μοτέρ 5 (mm)', size=(OFFSETS_LCOL_WIDTH, 1),
+                [sg.Text('Μοτέρ 5 (deg)', size=(OFFSETS_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('', do_not_clear=True, size=(6, 1),
                  enable_events=True,
                  key='motor_5')],
-                [sg.Text('Μοτέρ 6 (mm)', size=(OFFSETS_LCOL_WIDTH, 1),
+                [sg.Text('Μοτέρ 6 (deg)', size=(OFFSETS_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('', do_not_clear=True, size=(6, 1),
@@ -199,13 +199,13 @@ class Gui:
                  key='motor_6')]
             ])],
             [sg.Frame('Φύλλο Y', layout=[
-                [sg.Text('Μοτέρ 7 (mm)', size=(OFFSETS_LCOL_WIDTH, 1),
+                [sg.Text('Μοτέρ 7 (deg)', size=(OFFSETS_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('', do_not_clear=True, size=(6, 1),
                  enable_events=True,
                  key='motor_7')],
-                [sg.Text('Μοτέρ 8 (mm)', size=(OFFSETS_LCOL_WIDTH, 1),
+                [sg.Text('Μοτέρ 8 (deg)', size=(OFFSETS_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('', do_not_clear=True, size=(6, 1),
