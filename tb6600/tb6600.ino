@@ -32,8 +32,6 @@ int   totalSteps[] = {10, 10, 5};
 float rot_speed     = 1; // rpm
 int   interval      = 1000.0*60.0/(rot_speed*STEPS_PER_REVOLUTION)/2.0;
 
-const int vert_bar_steppers[]   = {1, 2};
-
 
 void initializePins() {
     for (int i = 0; i < LENGTH(PUL_PIN); i++) {
