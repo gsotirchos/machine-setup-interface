@@ -29,8 +29,8 @@ const int  SW_PIN[] = {10, 10, 11};
 
 // motion parameters
 int   totalSteps[] = {10, 10, 5};
-float rot_speed     = 1; // rpm
-int   interval      = 1000.0*60.0/(rot_speed*STEPS_PER_REVOLUTION)/2.0;
+float rot_speed    = 1; // rpm
+int   interval     = 1000.0*60.0/(rot_speed*STEPS_PER_REVOLUTION)/2.0;
 
 
 void initializePins() {
@@ -39,6 +39,7 @@ void initializePins() {
         pinMode(PUL_PIN[i], OUTPUT);
         pinMode(DIR_PIN[i], OUTPUT);
         pinMode( EN_PIN[i], OUTPUT);
+        pinMode( SW_PIN[i], INPUT_PULLUP);
         
         digitalWrite(DIR_PIN[i], HIGH); // positive direction
     }
@@ -81,17 +82,11 @@ void homeSteppers(int stepperCount, int steppers[]) {
     }
 
     while(digitalRead(DIR_PIN[steppers[0]]) == LOW) {
-        if (digitalRead(SW_PIN[steppers[0]]) == LOW) {
-            // keep moving
+        if (digitalRead(SW_PIN[steppers[0]]) == HIGH) {
+            // limit switch not pressed, keep moving
             moveSteppers(stepperCount, steppers, 1);
-
-            //for (int i = 0; i < stepperCount; i++) {
-            //    digitalWrite(DIR_PIN[steppers[i]], HIGH);
-            //}
-            //delay(interval);
-
         } else {
-            // normal rotation
+            // forward rotation
             for (int i = 0; i < stepperCount; i++) {
                 digitalWrite(DIR_PIN[steppers[i]], HIGH);
             }
