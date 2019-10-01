@@ -22,13 +22,13 @@ const int HORIZ_STOP_STEPPERS[] = {3};
 const int STEPS_PER_REVOLUTION = 200;
 
 // pins numbers
-const int PUL_PIN[] = { 3,  5,  6};
-const int DIR_PIN[] = { 2,  4,  7};
-const int  EN_PIN[] = { 8, 12, 13};
-const int  SW_PIN[] = {10, 10, 11};
+const int PUL_PIN[] = {3, 6, 11};
+const int DIR_PIN[] = {2, 7, 12};
+const int  EN_PIN[] = {4, 8, 13};
+const int  SW_PIN[] = {9, 9, 10};
 
 // motion parameters
-int   totalSteps[] = {10, 10, 5};
+int   totalSteps[] = {10, 7, 5};
 float rot_speed    = 1; // rpm
 int   interval     = 1000.0*60.0/(rot_speed*STEPS_PER_REVOLUTION)/2.0;
 
