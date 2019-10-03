@@ -41,7 +41,7 @@ void initializePins() {
         pinMode( EN_PIN[i], OUTPUT);
         pinMode( SW_PIN[i], INPUT_PULLUP);
         
-        digitalWrite(DIR_PIN[i], HIGH); // positive direction
+        digitalWrite(DIR_PIN[i], LOW); // forward (negative) rotation
     }
 }
 
@@ -76,19 +76,19 @@ void homeSteppers(int stepperCount, int steppers[]) {
     SerialPrintSteppers(stepperCount, steppers);
     Serial.println(".");
 
-    // reverse rotation
+    // reverse rotation for return to home position
     for (int i = 0; i < stepperCount; i++) {
-        digitalWrite(DIR_PIN[steppers[i]], LOW);
+        digitalWrite(DIR_PIN[steppers[i]], HIGH);
     }
 
-    while(digitalRead(DIR_PIN[steppers[0]]) == LOW) {
+    while(digitalRead(DIR_PIN[steppers[0]]) == HIGH) {
         if (digitalRead(SW_PIN[steppers[0]]) == HIGH) {
             // limit switch not pressed, keep moving
             moveSteppers(stepperCount, steppers, 1);
         } else {
-            // forward rotation
+            // change to forward rotation
             for (int i = 0; i < stepperCount; i++) {
-                digitalWrite(DIR_PIN[steppers[i]], HIGH);
+                digitalWrite(DIR_PIN[steppers[i]], LOW);
             }
             delay(interval);
 
