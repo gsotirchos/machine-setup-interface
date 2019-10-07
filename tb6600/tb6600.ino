@@ -1,19 +1,21 @@
 #define LENGTH(array) ( sizeof(array)/sizeof(array[0]) )
 
-#define MOVE(steppers) { \
+#define HOME(steppers) { \
     waitForSerial(); \
     shiftArr(LENGTH(steppers), steppers, -1); \
-    moveSteppers(LENGTH(steppers), steppers, totalSteps[steppers[1]]); \
+    homeSteppers(LENGTH(steppers), steppers); \
     shiftArr(LENGTH(steppers), steppers, +1); \
 }
 
-#define HOME(steppers) { \
+#define MOVE(steppers) { \
     waitForSerial(); \
-    shiftArr(3, steppers, -1); \
-    homeSteppers(LENGTH(steppers), steppers); \
-    shiftArr(3, steppers, +1); \
+    Serial.print("\n-- Insert steps: "); \
+    totalSteps = readFromSerial(); \
+    Serial.println(totalSteps); \
+    shiftArr(LENGTH(steppers), steppers, -1); \
+    moveSteppers(LENGTH(steppers), steppers, totalSteps); \
+    shiftArr(LENGTH(steppers), steppers, +1); \
 }
-
 
 // steppers
 const int VERT_BAR_STEPPERS[]   = {1, 2};
@@ -25,13 +27,12 @@ const int STEPS_PER_REVOLUTION = 200;
 const int PUL_PIN[] = {3, 6, 11};
 const int DIR_PIN[] = {2, 7, 12};
 const int  EN_PIN[] = {4, 8, 13};
-const int  SW_PIN[] = {9, 9, 10};
+const int  SW_PIN[] = {5, 9, 10};
 
 // motion parameters
-int   totalSteps[] = {10, 7, 5};
-float rot_speed    = 1; // rpm
-int   interval     = 1000.0*60.0/(rot_speed*STEPS_PER_REVOLUTION)/2.0;
-
+int   totalSteps = 0;
+float rot_speed  = 0.5; // rpm
+float interval   = 1000.0*60.0/(rot_speed*STEPS_PER_REVOLUTION)/2.0;
 
 void initializePins() {
     for (int i = 0; i < LENGTH(PUL_PIN); i++) {
@@ -49,7 +50,7 @@ void waitForSerial() {
     Serial.println("\n[Press Return key to continue]");
     while (Serial.available()) { Serial.read(); }
     while (!Serial.available()) {}
-    //Serial.println(Serial.read());
+    //Serial.println(Serial.read()); // print read value
     Serial.println("[Continuing]");
 }
 
@@ -76,34 +77,38 @@ void homeSteppers(int stepperCount, int steppers[]) {
     SerialPrintSteppers(stepperCount, steppers);
     Serial.println(".");
 
+    int moved = 1;
+
     // reverse rotation for return to home position
     for (int i = 0; i < stepperCount; i++) {
         digitalWrite(DIR_PIN[steppers[i]], HIGH);
     }
 
-    while(digitalRead(DIR_PIN[steppers[0]]) == HIGH) {
-        if (digitalRead(SW_PIN[steppers[0]]) == HIGH) {
-            // limit switch not pressed, keep moving
-            moveSteppers(stepperCount, steppers, 1);
-        } else {
-            // change to forward rotation
-            for (int i = 0; i < stepperCount; i++) {
+    while(moved == 1) {
+        for (int i = 0; i < stepperCount; i++) {
+            if (digitalRead(SW_PIN[steppers[i]]) == HIGH) {
+                // limit switch not pressed, keep moving
+                moveSteppers(1, &steppers[i], 1);
+                moved = 1;
+            } else {
+                // change to forward rotation
                 digitalWrite(DIR_PIN[steppers[i]], LOW);
+                moved = 0;
             }
-            delay(interval);
-
         }
+
+        delay(interval);
     }
 
     Serial.println("\n== Homing finished.");
 }
 
 void moveSteppers(int stepperCount, int steppers[], int totalSteps) {
-    char sign;
+    String sign;
     if (digitalRead(DIR_PIN[steppers[0]]) == LOW) {
-        sign = '-';
+        sign = "-";
     } else {
-        sign = '+';
+        sign = "+";
     }
 
     Serial.print("\n-- Rotating motor(s) ");
@@ -125,16 +130,32 @@ void moveSteppers(int stepperCount, int steppers[], int totalSteps) {
         delay(interval);
 
         // show progress
-        Serial.print('\r');
-        Serial.print("step: ");
-        Serial.print(sign);
-        Serial.print(step + 1);
-        Serial.print("/");
-        Serial.print(sign);
-        Serial.println(totalSteps);
+        Serial.println(
+            "step: " + sign + (step + 1) + "/" + sign + totalSteps
+        );
     }
 
     Serial.println("-- Rotating finished.");
+}
+
+int readFromSerial() {
+    Serial.flush();
+    String inputString = "";
+
+    // Read integer value from serial input:
+    Serial.read();
+    while (1) {
+        while (!Serial.available()) {}
+        inputString = Serial.readStringUntil('\n');
+
+        if (inputString.toInt() > 0) {
+            // convert the incoming byte to a char
+            // and add it to the string
+            return inputString.toInt();
+        } else {
+            Serial.println("Please insert a positive integer.");
+        }
+    }
 }
 
 void setup() {
@@ -148,7 +169,7 @@ void setup() {
 void loop() {
     Serial.flush();
 
-    while(1) {
+    /*while(1) {*/
         // show info
         Serial.println("----------------------------------------");
         Serial.println("---------------- START -----------------");
@@ -156,6 +177,9 @@ void loop() {
         Serial.print("Rotational speed = ");
         Serial.print(rot_speed);
         Serial.println(" rpm");
+        Serial.print("Interval = ");
+        Serial.print(interval);
+        Serial.println(" ms");
 
         // home and move vertical bar's stepper pair
         HOME(VERT_BAR_STEPPERS);
@@ -171,7 +195,6 @@ void loop() {
 
         // wait for keypress
         waitForSerial();
-
-    }
+    /*}*/
 }
 
