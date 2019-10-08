@@ -18,8 +18,8 @@
 }
 
 // steppers
-const int VERT_BAR_STEPPERS[]   = {1, 2};
-const int HORIZ_STOP_STEPPERS[] = {3};
+int VERT_BAR_STEPPERS[]   = {1, 2};
+int VERT_STOP_STEPPERS[] = {3};
 
 const int STEPS_PER_REVOLUTION = 200;
 
@@ -31,7 +31,7 @@ const int  SW_PIN[] = {5, 9, 10};
 
 // motion parameters
 int   totalSteps = 0;
-float rot_speed  = 0.5; // rpm
+float rot_speed  = 10; // rpm
 float interval   = 1000.0*60.0/(rot_speed*STEPS_PER_REVOLUTION)/2.0;
 
 void initializePins() {
@@ -42,7 +42,7 @@ void initializePins() {
         pinMode( EN_PIN[i], OUTPUT);
         pinMode( SW_PIN[i], INPUT_PULLUP);
         
-        digitalWrite(DIR_PIN[i], LOW); // forward (negative) rotation
+        digitalWrite(DIR_PIN[i], HIGH); // forward rotation
     }
 }
 
@@ -77,24 +77,38 @@ void homeSteppers(int stepperCount, int steppers[]) {
     SerialPrintSteppers(stepperCount, steppers);
     Serial.println(".");
 
-    int moved = 1;
+    int finished = 0;
 
     // reverse rotation for return to home position
     for (int i = 0; i < stepperCount; i++) {
         digitalWrite(DIR_PIN[steppers[i]], HIGH);
     }
 
-    while(moved == 1) {
+    while(1) {
         for (int i = 0; i < stepperCount; i++) {
             if (digitalRead(SW_PIN[steppers[i]]) == HIGH) {
                 // limit switch not pressed, keep moving
                 moveSteppers(1, &steppers[i], 1);
-                moved = 1;
             } else {
                 // change to forward rotation
-                digitalWrite(DIR_PIN[steppers[i]], LOW);
-                moved = 0;
+                Serial.print(" ----- Limit switch on pin ");
+                Serial.print(SW_PIN[steppers[i]]);
+                Serial.println(" closed.");
             }
+        }
+
+        finished = 1;
+        for (int i = 0; i < stepperCount; i++) {
+            if (digitalRead(SW_PIN[steppers[i]]) == HIGH) {
+                finished = 0;
+            }
+        }
+
+        if (finished == 1) {
+            for (int i = 0; i < stepperCount; i++) {
+                digitalWrite(DIR_PIN[steppers[i]], LOW);
+            }
+            break;
         }
 
         delay(interval);
@@ -182,12 +196,12 @@ void loop() {
         Serial.println(" ms");
 
         // home and move vertical bar's stepper pair
-        HOME(VERT_BAR_STEPPERS);
-        MOVE(VERT_BAR_STEPPERS);
+        //HOME(VERT_BAR_STEPPERS);
+        //MOVE(VERT_BAR_STEPPERS);
 
         // home and move horizontal panel stop's stepper pair
-        HOME(HORIZ_STOP_STEPPERS);
-        MOVE(HORIZ_STOP_STEPPERS);
+        HOME(VERT_STOP_STEPPERS);
+        MOVE(VERT_STOP_STEPPERS);
 
         Serial.println("----------------------------------------");
         Serial.println("---------------- FINISH ----------------");
