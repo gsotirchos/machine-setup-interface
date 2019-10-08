@@ -183,32 +183,30 @@ void setup() {
 void loop() {
     Serial.flush();
 
-    /*while(1) {*/
-        // show info
-        Serial.println("----------------------------------------");
-        Serial.println("---------------- START -----------------");
-        Serial.println("----------------------------------------");
-        Serial.print("Rotational speed = ");
-        Serial.print(rot_speed);
-        Serial.println(" rpm");
-        Serial.print("Interval = ");
-        Serial.print(interval);
-        Serial.println(" ms");
+    // show info
+    Serial.println("----------------------------------------");
+    Serial.println("---------------- START -----------------");
+    Serial.println("----------------------------------------");
+    Serial.print("Rotational speed = ");
+    Serial.print(rot_speed);
+    Serial.println(" rpm");
+    Serial.print("Interval = ");
+    Serial.print(interval);
+    Serial.println(" ms");
 
-        // home and move vertical bar's stepper pair
-        //HOME(VERT_BAR_STEPPERS);
-        //MOVE(VERT_BAR_STEPPERS);
+    // home and move vertical bar's stepper pair
+    //HOME(VERT_BAR_STEPPERS);
+    //MOVE(VERT_BAR_STEPPERS);
 
-        // home and move horizontal panel stop's stepper pair
-        HOME(VERT_STOP_STEPPERS);
-        MOVE(VERT_STOP_STEPPERS);
+    // home and move horizontal panel stop's stepper pair
+    HOME(VERT_STOP_STEPPERS);
+    MOVE(VERT_STOP_STEPPERS);
 
-        Serial.println("----------------------------------------");
-        Serial.println("---------------- FINISH ----------------");
-        Serial.println("----------------------------------------");
+    Serial.println("----------------------------------------");
+    Serial.println("---------------- FINISH ----------------");
+    Serial.println("----------------------------------------");
 
-        // wait for keypress
-        waitForSerial();
-    /*}*/
+    // wait for keypress
+    waitForSerial();
 }
 
