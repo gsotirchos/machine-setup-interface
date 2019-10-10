@@ -83,8 +83,8 @@ class Gui:
         # define main window layout
         self.layout = [
             # absobrber info
-            [sg.Text('Κωδικός απορροφητή:',
-             size=(LCOL_WIDTH, 1),
+            [sg.Text('Κωδικός συλλέκτη:',
+             size=(14, 1),
              auto_size_text=False,
              justification='right')],
             [sg.InputText(do_not_clear=True, size=(30, 1),
@@ -96,7 +96,7 @@ class Gui:
              key='is_horizontal')],
 
             # panel/strips section
-            [sg.Frame('Χαρακτηριστικά απορροφητή (mm)', layout=[
+            [sg.Frame('Χαρακτηριστικά συλλέκτη (mm)', layout=[
                 # header diameter
                 [sg.Text('⌀ κολεκτέρ', size=(FRAME_LCOL_WIDTH, 1),
                  auto_size_text=False,
@@ -296,7 +296,7 @@ class Gui:
             comparison = 'μικρότερο'
 
         if size_error:
-            return ('Σφάλμα: το ' + dimension + ' του απορροφητή είναι '
+            return ('Σφάλμα: το ' + dimension + ' του συλλέκτη είναι '
                     + comparison + ' από αυτό που εξυπηρετεί η διάταξη.')
 
         return ''
