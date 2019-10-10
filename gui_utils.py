@@ -114,7 +114,7 @@ class Gui:
                  key='head_to_head')],
 
                 # free header exit length
-                [sg.Text('Μήκος ελεύθερης\nεξόδου header',
+                [sg.Text('Μήκος ελεύθερης\nεξόδου κολεκτέρ',
                  size=(FRAME_LCOL_WIDTH, 2),
                  auto_size_text=False,
                  justification='right'),

@@ -70,7 +70,7 @@ class Configuration:
                          dimensions['grid_width'])/2)
 
         theta = arcsin(distance/self.PANEL_STOP_LENGTH)*360/(2*pi)
-        motor_angle = theta - self.START_ANGLE - offsets  # radians
+        motor_angle = theta - self.START_ANGLE + offsets  # radians
         motor_steps = floor(motor_angle/self.STEP_ANGLE)
         return motor_steps.tolist()
 
@@ -87,7 +87,7 @@ class Configuration:
                         dimensions['header_exit_length'])
 
         theta = arcsin(distance/self.PANEL_STOP_LENGTH)*360/(2*pi)
-        motor_angle = theta - self.START_ANGLE - offsets  # radians
+        motor_angle = theta - self.START_ANGLE + offsets  # radians
         motor_steps = floor(motor_angle/self.STEP_ANGLE)
         return motor_steps.tolist()
 
