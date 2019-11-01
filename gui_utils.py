@@ -19,7 +19,7 @@ class Gui:
         TB_WID = 8
         self.was_horizontal = False
 
-        HOMEPATH = 'C:' + environ["HOMEPATH"]
+        HOMEPATH = 'C:' + environ['HOMEPATH']
         if getattr(sys, 'frozen', False):
             CURRENT_DIR = path.dirname(path.realpath(sys.executable))
         elif __file__:
@@ -83,7 +83,7 @@ class Gui:
         # define main window layout
         self.layout = [
             # absobrber info
-            [sg.Text('Κωδικός συλλέκτη:',
+            [sg.Text("Κωδικός συλλέκτη:",
              size=(14, 1),
              auto_size_text=False,
              justification='right')],
@@ -91,14 +91,14 @@ class Gui:
                           enable_events=True, key='absorber_info')],
 
             # is horizontal absorber
-            [sg.Checkbox('Οριζόντιος', default=False,
+            [sg.Checkbox("Οριζόντιος", default=False,
              enable_events=True,
              key='is_horizontal')],
 
             # panel/strips section
-            [sg.Frame('Χαρακτηριστικά συλλέκτη (mm)', layout=[
+            [sg.Frame("Χαρακτηριστικά συλλέκτη " + '(mm)', layout=[
                 # header diameter
-                [sg.Text('⌀ κολεκτέρ', size=(FRAME_LCOL_WIDTH, 1),
+                [sg.Text("Φ κολεκτέρ", size=(FRAME_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('22', do_not_clear=True, size=(TB_WID, 1),
@@ -106,7 +106,7 @@ class Gui:
                  key='header_diameter')],
 
                 # head to head distance
-                [sg.Text('Κέντρο-κέντρο', size=(FRAME_LCOL_WIDTH, 1),
+                [sg.Text("Κέντρο-κέντρο", size=(FRAME_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText(do_not_clear=True, size=(TB_WID, 1),
@@ -114,7 +114,7 @@ class Gui:
                  key='head_to_head')],
 
                 # free header exit length
-                [sg.Text('Μήκος ελεύθερης\nεξόδου κολεκτέρ',
+                [sg.Text("Μήκος ελεύθερης " + '\n' + "εξόδου κολεκτέρ",
                  size=(FRAME_LCOL_WIDTH, 2),
                  auto_size_text=False,
                  justification='right'),
@@ -123,7 +123,7 @@ class Gui:
                  key='header_exit_length')],
 
                 # panel width
-                [sg.Text('Πλάτος φύλλου',
+                [sg.Text("Πλάτος φύλλου",
                  size=(FRAME_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
@@ -132,7 +132,7 @@ class Gui:
                  key='panel_width')],
 
                 # panel width
-                [sg.Text('Μήκος φύλλου',
+                [sg.Text("Μήκος φύλλου",
                  size=(FRAME_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
@@ -147,65 +147,65 @@ class Gui:
 
             # buttons
             [sg.Text(' ' * 3),
-             sg.Button('Αποστολή', size=(9, 1), key='send_button'),
-             sg.Button('Αποθήκευση', size=(9, 1), key='save_button')],
+             sg.Button("Αποστολή", size=(9, 1), key='send_button'),
+             sg.Button("Αποθήκευση", size=(9, 1), key='save_button')],
             [sg.Text(' ' * 3),
              sg.Button('Offsets', size=(9, 1), key='offsets_button'),
-             sg.Button('Φόρτωση', size=(9, 1), key='load_button')]
+             sg.Button("Φόρτωση", size=(9, 1), key='load_button')]
         ]
 
         # define machine offsets window layout
         self.offsets_layout = [
-            [sg.Frame('Πλέγμα X', layout=[
-                [sg.Text('Μοτέρ 1 (mm)', size=(OFFSETS_LCOL_WIDTH, 1),
+            [sg.Frame("Πλέγμα " + 'X', layout=[
+                [sg.Text("Μοτέρ 1 (mm)", size=(OFFSETS_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('', do_not_clear=True, size=(6, 1),
                  enable_events=True,
                  key='motor_1')],
-                [sg.Text('Μοτέρ 2 (mm)', size=(OFFSETS_LCOL_WIDTH, 1),
+                [sg.Text("Μοτέρ 2 (mm)", size=(OFFSETS_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('', do_not_clear=True, size=(6, 1),
                  enable_events=True,
                  key='motor_2')]
             ])],
-            [sg.Frame('Πλέγμα Y', layout=[
-                [sg.Text('Μοτέρ 3 (mm)', size=(OFFSETS_LCOL_WIDTH, 1),
+            [sg.Frame("Πλέγμα " + 'Y', layout=[
+                [sg.Text("Μοτέρ 3 (mm)", size=(OFFSETS_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('', do_not_clear=True, size=(6, 1),
                  enable_events=True,
                  key='motor_3')],
-                [sg.Text('Μοτέρ 4 (mm)', size=(OFFSETS_LCOL_WIDTH, 1),
+                [sg.Text("Μοτέρ 4 (mm)", size=(OFFSETS_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('', do_not_clear=True, size=(6, 1),
                  enable_events=True,
                  key='motor_4')]
             ])],
-            [sg.Frame('Φύλλο X', layout=[
-                [sg.Text('Μοτέρ 5 (deg)', size=(OFFSETS_LCOL_WIDTH, 1),
+            [sg.Frame("Φύλλο X", layout=[
+                [sg.Text("Μοτέρ 5 (deg)", size=(OFFSETS_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('', do_not_clear=True, size=(6, 1),
                  enable_events=True,
                  key='motor_5')],
-                [sg.Text('Μοτέρ 6 (deg)', size=(OFFSETS_LCOL_WIDTH, 1),
+                [sg.Text("Μοτέρ 6 (deg)", size=(OFFSETS_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('', do_not_clear=True, size=(6, 1),
                  enable_events=True,
                  key='motor_6')]
             ])],
-            [sg.Frame('Φύλλο Y', layout=[
-                [sg.Text('Μοτέρ 7 (deg)', size=(OFFSETS_LCOL_WIDTH, 1),
+            [sg.Frame("Φύλλο Y", layout=[
+                [sg.Text("Μοτέρ 7 (deg)", size=(OFFSETS_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('', do_not_clear=True, size=(6, 1),
                  enable_events=True,
                  key='motor_7')],
-                [sg.Text('Μοτέρ 8 (deg)', size=(OFFSETS_LCOL_WIDTH, 1),
+                [sg.Text("Μοτέρ 8 (deg)", size=(OFFSETS_LCOL_WIDTH, 1),
                  auto_size_text=False,
                  justification='right'),
                  sg.InputText('', do_not_clear=True, size=(6, 1),
@@ -220,7 +220,7 @@ class Gui:
             # buttons
             [sg.Button('OK', size=(10, 1),
                        key='OK_button'),
-             sg.Button('Επαναφορά', size=(10, 1),
+             sg.Button("Επαναφορά", size=(10, 1),
                        key='reset_button')]
         ]
 
@@ -257,9 +257,9 @@ class Gui:
 
                 if type(values[key]) == str:
                     if not self.is_positive_float(values[key]):
-                        return 'Σφάλμα: επιτρέπονται μόνο θετικοί αριθμοί'
+                        return "Σφάλμα: επιτρέπονται μόνο θετικοί αριθμοί"
         except AttributeError:
-            return 'Σφαλμα: μη έγκυρη τιμή'
+            return "Σφαλμα: μη έγκυρη τιμή"
 
         size_error = False
         dimension = ''
@@ -279,25 +279,25 @@ class Gui:
 
         if (effective_width > self.configuration.MAX_WIDTH):
             size_error = True
-            dimension = 'πλάτος'
-            comparison = 'μεγαλύτερο'
+            dimension = "πλάτος"
+            comparison = "μεγαλύτερο"
         elif (effective_width < self.configuration.MIN_WIDTH):
             size_error = True
-            dimension = 'πλάτος'
-            comparison = 'μικρότερο'
+            dimension = "πλάτος"
+            comparison = "μικρότερο"
 
         if (effective_length > self.configuration.MAX_LENGTH):
             size_error = True
-            dimension = 'μήκος'
-            comparison = 'μεγαλύτερο'
+            dimension = "μήκος"
+            comparison = "μεγαλύτερο"
         elif (effective_length < self.configuration.MIN_LENGTH):
             size_error = True
-            dimension = 'μήκος'
-            comparison = 'μικρότερο'
+            dimension = "μήκος"
+            comparison = "μικρότερο"
 
         if size_error:
-            return ('Σφάλμα: το ' + dimension + ' του συλλέκτη είναι '
-                    + comparison + ' από αυτό που εξυπηρετεί η διάταξη.')
+            return ("Σφάλμα: το " + dimension + " του συλλέκτη είναι "
+                    + comparison + " από αυτό που εξυπηρετεί η διάταξη.")
 
         return ''
 
@@ -307,10 +307,10 @@ class Gui:
             for key in values.keys():
                 if type(values[key]) == str:
                     if not self.is_float(values[key]):
-                        return ('Σφάλμα: επιτρέπονται μόνο θετικοί '
-                                'αριθμοί ' + values[key])
+                        return ("Σφάλμα: επιτρέπονται μόνο θετικοί "
+                                "αριθμοί " + values[key])
         except AttributeError:
-            return 'Σφαλμα: μη έγκυρη τιμή'
+            return "Σφαλμα: μη έγκυρη τιμή"
 
         return ''
 
@@ -327,28 +327,28 @@ class Gui:
                 # write separators
                 if key == 'header_diameter':
                     the_file.write(
-                        '# Διάμετρος κολεκτέρ (mm)\n'
+                            '#' + " Διάμετρος κολεκτέρ " + '(mm)\n'
                     )
                 elif key == 'head_to_head':
                     the_file.write(
-                        '# Απόσταση κέντρο-κέντρο (mm)\n'
+                        '#' + " Απόσταση κέντρο-κέντρο " + '(mm)\n'
                     )
                 elif key == 'header_exit_length':
                     the_file.write(
-                        '# Μήκος ελεύθερης εξόδου header (mm)\n'
+                        '#' +" Μήκος ελεύθερης εξόδου " + 'header (mm)\n'
                     )
                 elif key == 'panel_width':
                     the_file.write(
-                        '# Πλάτος φύλλου (mm)\n'
+                        '#' + " Πλάτος φύλλου " + '(mm)\n'
                     )
                 elif key == 'panel_lenth':
                     the_file.write(
-                        '# Μήκος φύλλου (mm)\n'
+                        '#' + " Μήκος φύλλου " + '(mm)\n'
                     )
                 the_file.write(key + '=' + str(values[key]) + '\n\n')
 
-        self.show_error('Οι ρυθμίσεις αποθηκεύτηκαν στο '
-                        'αρχείο:\n' + self.output_file)
+        self.show_error("Οι ρυθμίσεις αποθηκεύτηκαν στο "
+                        "αρχείο:" + '\n' + self.output_file)
 
     def import_configuration_from_file(self, values, file_path):
         if path.isfile(file_path):
@@ -365,7 +365,7 @@ class Gui:
                                 values[key] = values[key] == 'true'
                             self.window.Element(key).Update(values[key])
 
-        self.show_error('Οι ρυθμίσεις φορτώθηκαν από το αρχείο:\n' +
+        self.show_error("Οι ρυθμίσεις φορτώθηκαν από το αρχείο:" + '\n' +
                         file_path)
 
     def export_offsets_to_file(self):
@@ -393,8 +393,8 @@ class Gui:
                                     line.strip('\n').split('=')[1]
                             )
 
-            self.show_offsets_error('Τα offsets φορτώθηκαν από το '
-                                    'αρχείο:\n' + self.OFFSETS_FILE)
+            self.show_offsets_error("Τα "+'offsets'+"φορτώθηκαν από το "
+                                    "αρχείο:" + '\n' + self.OFFSETS_FILE)
 
         return imported_offsets
 
@@ -442,8 +442,8 @@ class Gui:
                 self.export_offsets_to_file()
 
                 self.show_offsets_error(
-                    ('Τα offsets αποθηκεύτηκαν στο αρχείο:\n' +
-                     self.OFFSETS_FILE)
+                        ("Τα "+'offsets'+" αποθηκεύτηκαν στο αρχείο:" +
+                        '\n' + self.OFFSETS_FILE)
                 )
 
                 break
@@ -466,7 +466,7 @@ class Gui:
 
     def run(self):
         # draw main window
-        self.window = sg.Window('Ρύθμιση Διάταξης').Layout(self.layout)
+        self.window = sg.Window("Ρύθμιση Διάταξης").Layout(self.layout)
 
         # main window vent Loop
         while True:
@@ -512,14 +512,14 @@ class Gui:
 
                 # prompt user to supply file name
                 self.output_file = sg.PopupGetFile(
-                    title='Αποθήκευση ρυθμήσεων',
-                    message=('Παρακαλώ εισάγετε την τοποθεσία του '
-                             'παραγόμενου αρχείου'),
+                    title="Αποθήκευση ρυθμήσεων",
+                    message=("Παρακαλώ εισάγετε την τοποθεσία του "
+                             "παραγόμενου αρχείου"),
                     save_as=True,
                     default_path=(self.default_output_folder +
                                   self.guessed_name + '.dat'),
                     default_extension='dat',
-                    file_types=(("Αρχείο ρυθμίσεων", "*.dat"),)
+                    file_types=(("Αρχείο ρυθμίσεων", '*.dat'),)
                 )
 
                 # if a name is defined then proceed to save
@@ -538,8 +538,9 @@ class Gui:
                         pass
 
                     # create configuration DAT
-                    self.export_configuration_to_file(values,
-                                                      self.output_file)
+                    self.export_configuration_to_file(
+                            values, self.output_file
+                    )
 
                 # re-enable buttons
                 self.window.Element('save_button').Update(disabled=False)
@@ -559,13 +560,13 @@ class Gui:
 
                 # prompt user to supply file name
                 self.input_file = sg.PopupGetFile(
-                    title='Φόρτωση ρυθμήσεων',
-                    message=('Παρακαλώ εισάγετε την τοποθεσία του '
-                             'αρχείου προς φόρτωση'),
+                    title="Φόρτωση ρυθμήσεων",
+                    message=("Παρακαλώ εισάγετε την τοποθεσία του "
+                             "αρχείου προς φόρτωση"),
                     save_as=False,
                     default_path=(self.default_output_folder),
                     default_extension='dat',
-                    file_types=(("Αρχείο ρυθμίσεων", "*.dat"),)
+                    file_types=(("Αρχείο ρυθμίσεων", '*.dat'),)
                 )
 
                 # if a name is defined then proceed to load
@@ -577,7 +578,7 @@ class Gui:
                             self.input_file
                         )
                     else:
-                        self.show_error('Μη συμβατό αρχείο προς φόρτωση.')
+                        self.show_error("Μη συμβατό αρχείο προς φόρτωση.")
 
                 # re-enable buttons
                 self.window.Element('save_button').Update(disabled=False)
@@ -636,7 +637,7 @@ class Gui:
                 for char in ['/', '\\', '|', '*']:
                     guessed_name = guessed_name.replace(char, '-')
 
-                for char in ['\t', ':', '?', '\"', '<', '>']:
+                for char in ['\t', ':', '?', '<', '>']:
                     guessed_name = guessed_name.replace(char, '')
 
                 if guessed_name != '':
