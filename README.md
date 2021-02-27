@@ -17,8 +17,8 @@ purpose is to completely replace the current manual setup method with the
 designed reconfiguragle fixture. Through field observations the technical 
 standards the design has to satisfy were determined, which involve 
 geometric limitations and required range of motion. The final design was 
-developed and optimized using CAD. The proposed design is shown below (on 
-the table only four corners of a solar absorber are shown).
+developed and optimized using CAD. The proposed design is shown below 
+(only four corners of a solar absorber are shown on the table).
 
 <p align="center">
   <img src="./images/detailed.svg" width="66%" height="66%">
