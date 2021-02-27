@@ -18,7 +18,7 @@
 }
 
 // steppers
-int VERT_BAR_STEPPERS[]   = {1, 2};
+int VERT_BAR_STEPPERS[]  = {1, 2};
 int VERT_STOP_STEPPERS[] = {3};
 
 const int STEPS_PER_REVOLUTION = 200;
