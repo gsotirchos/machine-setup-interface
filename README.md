@@ -20,7 +20,9 @@ geometric limitations and required range of motion. The final design was
 developed and optimized using CAD. The proposed design is shown below (on 
 the table only four corners of a solar absorber are shown).
 
-<img src="./images/detailed.svg" width="66%" height="66%">
+<p align="center">
+  <img src="./images/detailed.svg" width="66%" height="66%">
+</p>
 
 The necessary components for the proof-of-concept prototype testing were 
 either one of the two stepper actuated bars and any one of the rotating 
@@ -53,9 +55,9 @@ homed (return to home position) determined by the limit switches'
 positions. Also, the limit switches act as additional hard safety in 
 case of out of inserted values or forced motion beyond allowed limits.
 
-<img src="./images/schematic.png" width="60%" height="60%">
-
 <p align="center">
+  <img src="./images/schematic.png" width="60%" height="60%">
+
   <img src="./images/arduino_2.jpg" width="40%" height="40%">
   <img src="./images/arduino_3.jpg" width="40%" height="40%">
 </p>
@@ -76,7 +78,9 @@ main window (left window) are depicted in the following figure for
 vertical and horizontal solar absorber type respecitively, which is also 
 inputted through a checkbox.
 
-<img src="./images/basic_dimensions.svg" width="60%" height="60%">
+<p align="center">
+  <img src="./images/basic_dimensions.svg" width="60%" height="60%">
+</p>
 
 With this information the required fixture elements' displacements, 
 stepper motor rotation angles, and lastly required steps and directions 
@@ -86,7 +90,9 @@ be measured from the actual assembly and inserted as global constants in
 the constructor of the Configuration class in the file 
 `configuration_utils.py`.
 
-<img src="./images/parameters_detail.svg" width="60%" height="60%">
+<p align="center">
+  <img src="./images/parameters_detail.svg" width="60%" height="60%">
+</p>
 
 Once all of the above is done, by pressing `Send` in the main window a 
 text file containing the steps for each of the eight motors is generated 
